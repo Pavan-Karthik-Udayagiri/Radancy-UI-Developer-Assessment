@@ -1,10 +1,36 @@
-@charset "UTF-8";
 /* =========================================================
    VARIABLES & MIXINS
 ========================================================= */
+
+// Colors
+$citizens-green: #00a67e;
+$banner-green: #008756;
+$citizens-orange: #f26b21;
+$citizens-orange-dark: #d95a15;
+$text-gray: #666;
+$border-light: #e0e0e0;
+$white: #ffffff;
+
+// Typography
+$font-stack: Arial, Helvetica, sans-serif;
+
+// Breakpoints
+$tablet: 768px;
+$mobile: 480px;
+
+// Media query mixin
+@mixin respond($device) {
+  @if $device == tablet {
+    @media (max-width: $tablet) { @content; }
+  } @else if $device == mobile {
+    @media (max-width: $mobile) { @content; }
+  }
+}
+
 /* =========================================================
    BASE STYLES
 ========================================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +38,9 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #ffffff;
-  color: #666;
+  font-family: $font-stack;
+  background-color: $white;
+  color: $text-gray;
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -28,45 +54,49 @@ body {
 /* =========================================================
    NAVIGATION
 ========================================================= */
+
 nav {
   width: 100%;
   padding: 1rem 2rem;
-  background-color: #ffffff;
-}
-nav .logo {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-nav .logo img {
-  max-width: 300px;
-  width: 100%;
-  height: auto;
+  background-color: $white;
+
+  .logo {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 /* =========================================================
    HERO IMAGE
 ========================================================= */
+
 .image-container {
   width: 100%;
   height: 450px;
   overflow: hidden;
-}
-.image-container picture,
-.image-container img {
-  width: 100%;
-  height: 100%;
-}
-.image-container img {
-  object-fit: cover;
-  object-position: center;
-}
-@media (max-width: 768px) {
-  .image-container {
+
+  picture,
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @include respond(tablet) {
     height: 360px;
   }
-}
-@media (max-width: 480px) {
-  .image-container {
+
+  @include respond(mobile) {
     height: 320px;
   }
 }
@@ -74,66 +104,63 @@ nav .logo img {
 /* =========================================================
    HEADINGS
 ========================================================= */
+
 .investment-heading,
 .citizens-advantage {
-  color: #00a67e;
+  color: $citizens-green;
   text-align: center;
   font-size: 2rem;
   margin: 2rem auto;
   position: relative;
   padding-bottom: 1rem;
-}
-.investment-heading::after,
-.citizens-advantage::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90px;
-  height: 3px;
-  background-color: #00a67e;
-}
-@media (max-width: 768px) {
-  .investment-heading,
-  .citizens-advantage {
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 3px;
+    background-color: $citizens-green;
+  }
+
+  @include respond(tablet) {
     font-size: 1.8rem;
+
+    &::after {
+      width: 50px;
+    }
   }
-  .investment-heading::after,
-  .citizens-advantage::after {
-    width: 50px;
-  }
-}
-@media (max-width: 480px) {
-  .investment-heading,
-  .citizens-advantage {
+
+  @include respond(mobile) {
     font-size: 1.5rem;
-  }
-  .investment-heading::after,
-  .citizens-advantage::after {
-    width: 40px;
+
+    &::after {
+      width: 40px;
+    }
   }
 }
 
 /* =========================================================
    MORTGAGE DESCRIPTION
 ========================================================= */
+
 .mortgage-description {
   max-width: 1200px;
   margin: 0 auto 2rem;
   padding: 0 3rem;
-}
-.mortgage-description p {
-  font-size: 1rem;
-  font-weight: 300;
-}
-@media (max-width: 768px) {
-  .mortgage-description {
+
+  p {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  @include respond(tablet) {
     padding: 0 1.5rem;
   }
-}
-@media (max-width: 480px) {
-  .mortgage-description {
+
+  @include respond(mobile) {
     padding: 0 1rem;
   }
 }
@@ -141,6 +168,7 @@ nav .logo img {
 /* =========================================================
    BUTTON
 ========================================================= */
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -148,23 +176,22 @@ nav .logo img {
 }
 
 .view-careers-btn {
-  background-color: #f26b21;
-  color: #ffffff;
+  background-color: $citizens-orange;
+  color: $white;
   text-decoration: none;
   font-size: 1.5rem;
   padding: 0.75rem 2rem;
   transition: background-color 0.3s ease;
-}
-.view-careers-btn:hover {
-  background-color: #d95a15;
-}
-@media (max-width: 768px) {
-  .view-careers-btn {
+
+  &:hover {
+    background-color: $citizens-orange-dark;
+  }
+
+  @include respond(tablet) {
     font-size: 1.1rem;
   }
-}
-@media (max-width: 480px) {
-  .view-careers-btn {
+
+  @include respond(mobile) {
     width: calc(100% - 2rem);
     text-align: center;
   }
@@ -173,6 +200,7 @@ nav .logo img {
 /* =========================================================
    BENEFITS GRID
 ========================================================= */
+
 .benefits-grid {
   max-width: 1200px;
   margin: 2rem auto;
@@ -180,9 +208,8 @@ nav .logo img {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-}
-@media (max-width: 480px) {
-  .benefits-grid {
+
+  @include respond(mobile) {
     grid-template-columns: 1fr;
     gap: 0;
   }
@@ -191,27 +218,30 @@ nav .logo img {
 .benefit-section {
   padding: 1.5rem;
   position: relative;
-}
-.benefit-section:nth-child(even)::before {
-  content: "";
-  position: absolute;
-  top: 20%;
-  bottom: 20%;
-  left: -1rem;
-  width: 1px;
-  background-color: #e0e0e0;
-}
-@media (max-width: 480px) {
-  .benefit-section:nth-child(even)::before {
-    display: none;
+
+  &:nth-child(even)::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: -1rem;
+    width: 1px;
+    background-color: $border-light;
   }
-  .benefit-section:not(:first-child) {
-    border-top: 1px solid #e0e0e0;
+
+  @include respond(mobile) {
+    &:nth-child(even)::before {
+      display: none;
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid $border-light;
+    }
   }
 }
 
 .benefit-title {
-  color: #00a67e;
+  color: $citizens-green;
   font-size: 1.25rem;
   margin-bottom: 1rem;
 }
@@ -228,19 +258,22 @@ nav .logo img {
   color: #24a600;
   text-decoration: none;
   font-weight: bold;
-}
-.benefit-link::after {
-  content: "›";
-  margin-left: 0.5rem;
-  font-size: 1.4rem;
-}
-.benefit-link:hover {
-  text-decoration: underline;
+
+  &::after {
+    content: '›';
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 /* =========================================================
    BANNER
 ========================================================= */
+
 .banner-wrapper {
   max-width: 1200px;
   margin: 2rem auto;
@@ -253,26 +286,29 @@ nav .logo img {
 }
 
 .header-banner {
-  background-color: #008756;
+  background-color: $banner-green;
   padding: 1rem;
   text-align: center;
-}
-.header-banner h2 {
-  color: #ffffff;
-  font-weight: normal;
+
+  h2 {
+    color: $white;
+    font-weight: normal;
+  }
 }
 
 .info-banner {
   background-color: #f0f7f4;
   padding: 2rem;
-}
-.info-banner p {
-  font-size: 1rem;
+
+  p {
+    font-size: 1rem;
+  }
 }
 
 /* =========================================================
    TESTIMONIALS
 ========================================================= */
+
 .testimonials-wrapper {
   max-width: 1200px;
   margin: 4rem auto;
@@ -283,9 +319,8 @@ nav .logo img {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 3rem;
-}
-@media (max-width: 768px) {
-  .testimonials-container {
+
+  @include respond(tablet) {
     grid-template-columns: 1fr;
   }
 }
@@ -300,11 +335,12 @@ nav .logo img {
   margin: 0 auto 1.5rem;
   border-radius: 50%;
   overflow: hidden;
-}
-.avatar-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .quote {
@@ -313,18 +349,20 @@ nav .logo img {
 }
 
 .author {
-  color: #00a67e;
-}
-.author .title {
-  font-size: 0.9rem;
-  color: #333;
+  color: $citizens-green;
+
+  .title {
+    font-size: 0.9rem;
+    color: #333;
+  }
 }
 
 /* =========================================================
    FOOTER
 ========================================================= */
+
 .footer-border {
-  border-top: 2px solid #008756;
+  border-top: 2px solid $banner-green;
 }
 
 .footer-container {
@@ -335,50 +373,45 @@ nav .logo img {
 
 .social-icons {
   margin-bottom: 1.5rem;
-}
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin-right: 15px;
-  border-radius: 50%;
-  color: #ffffff;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-.social-icons a:hover {
-  transform: translateY(-2px);
-}
-.social-icons a.facebook {
-  background: #4267b2;
-}
-.social-icons a.twitter {
-  background: #1da1f2;
-}
-.social-icons a.linkedin {
-  background: #0077b5;
-}
-.social-icons a.youtube {
-  background: #ff0000;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 50%;
+    color: $white;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &.facebook { background: #4267b2; }
+    &.twitter { background: #1da1f2; }
+    &.linkedin { background: #0077b5; }
+    &.youtube { background: #ff0000; }
+  }
 }
 
 .policy-text {
   font-size: 0.875rem;
   margin-bottom: 1rem;
-}
-.policy-text a {
-  color: #666;
-  text-decoration: underline;
+
+  a {
+    color: $text-gray;
+    text-decoration: underline;
+  }
 }
 
 .footer-links a {
   color: #000;
   text-decoration: none;
-}
-.footer-links a:hover {
-  text-decoration: underline;
-}
 
-/*# sourceMappingURL=styles.css.map */
+  &:hover {
+    text-decoration: underline;
+  }
+}
