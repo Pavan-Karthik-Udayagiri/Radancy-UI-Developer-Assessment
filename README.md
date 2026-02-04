@@ -1,1 +1,1 @@
-# Accolite-UI-Developer-coding-challenge
+# Radancy-UI-Developer-Coding-Challenge
